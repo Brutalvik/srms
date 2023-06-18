@@ -1,4 +1,4 @@
-import { lazy, startTransition, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import styles from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
@@ -8,30 +8,26 @@ import {
   hamburgerIsOpenSelector,
 } from "app/selectors/selectors";
 import { toggleDarkMode, toggleHamburger } from "app/reducers/theme";
-import DrawerItem from "components/Drawer/DrawerItem";
+import Spinner from "UI/Spinner/Spinner";
 
 const Header = () => {
   const dispatch = useDispatch();
   const hamburgerIsOpen = useSelector(hamburgerIsOpenSelector);
   const darkMode = useSelector(darkModeSelector);
 
+  const DrawerItem = lazy(() => import("components/Drawer/DrawerItem"));
+
   const toggleThemeIcon = () => {
-    startTransition(() => {
-      import("features/functions").then((module) => {
-        module.handleToggle(dispatch, toggleDarkMode);
-      });
+    import("features/functions").then((module) => {
+      module.handleToggle(dispatch, toggleDarkMode);
     });
   };
 
   const handleHamburgerToggle = () => {
-    startTransition(() => {
-      import("features/functions").then((module) => {
-        module.handleToggle(dispatch, toggleHamburger);
-      });
+    import("features/functions").then((module) => {
+      module.handleToggle(dispatch, toggleHamburger);
     });
   };
-
-  const Spinner = lazy(() => import("UI/Spinner/Spinner"));
 
   return (
     <Suspense fallback={<Spinner />}>

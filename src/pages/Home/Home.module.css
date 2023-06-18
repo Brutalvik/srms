@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  user-select: none;
+}
+
+.container h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.container h2 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.light {
+  color: #fff;
+}
+
+.dark {
+  color: #000;
+}
