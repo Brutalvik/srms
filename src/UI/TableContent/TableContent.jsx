@@ -17,10 +17,12 @@ const TableContent = ({
   tableCaption,
   tableHeaderData,
   tableRowData,
+  deletAction,
+  editAction,
 }) => {
   return (
     <TableContainer>
-      <Table variant="striped" colorScheme={colorScheme}>
+      <Table colorScheme={colorScheme}>
         <TableCaption>{tableCaption}</TableCaption>
         <Thead>
           <Tr>
@@ -31,14 +33,20 @@ const TableContent = ({
         </Thead>
         <Tbody>
           {tableRowData.map((row) => (
-            <Tr>
+            <Tr key={row._id}>
               <Td>{row.firstName}</Td>
               <Td>{row.lastName}</Td>
               <Td>{row.email}</Td>
               <Td>{row.dateOfBirth}</Td>
               <Td className={styles.action}>
-                <AiFillDelete className={styles.icon} />
-                <AiFillEdit className={styles.icon} />
+                <AiFillDelete
+                  className={styles.delete}
+                  onClick={() => deletAction(row)}
+                />
+                <AiFillEdit
+                  className={styles.edit}
+                  onClick={() => editAction(row)}
+                />
               </Td>
             </Tr>
           ))}

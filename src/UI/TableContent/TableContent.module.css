@@ -1,12 +1,17 @@
 @import url("../../App.module.css");
 
-.icon {
+.delete,
+.edit {
   cursor: pointer;
   font-size: 1.5em;
 }
 
-.icon:hover {
-  color: #000;
+.delete:hover {
+  color: #b20303;
+}
+
+.edit:hover {
+  color: #d27604;
 }
 
 .action {

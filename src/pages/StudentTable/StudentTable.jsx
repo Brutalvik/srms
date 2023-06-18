@@ -20,18 +20,26 @@ const StudentTable = () => {
     "Actions",
   ];
 
+  const deleteStudent = (student) => {
+    console.log(student);
+  };
+
+  const editStudent = (student) => {
+    console.log(student);
+  };
+
   useEffect(() => {
     dispatch(getAllStudentsThunk(dispatch));
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={darkMode ? styles.light : styles.dark}>
       {!isEmpty(students) && (
         <TableContent
-          colorScheme={darkMode ? "teal" : "gray"}
           tableCaption={caption}
           tableHeaderData={tableHeaderData}
           tableRowData={students.data}
+          deletAction={deleteStudent}
         />
       )}
     </div>

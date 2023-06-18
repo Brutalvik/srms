@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import useDidMountEffect from "customHooks/useDidMountEffect";
 import styles from "./AddStudent.module.css";
 import {
   FormControl,
@@ -20,25 +21,12 @@ const AddStudent = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const { message, status } = useSelector(addStudentConfirmation);
+  const [requestId, setRequestId] = useState(null);
 
-  const onSubmit = async (values) => {
+  const onSubmit = (values) => {
     dispatch(resetStudent());
-    dispatch(addStudentThunk({ values, dispatch }));
-    status === 200
-      ? toast({
-          title: "Success",
-          description: message,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        })
-      : toast({
-          title: "Error",
-          description: message,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+    const { requestId } = dispatch(addStudentThunk({ values, dispatch }));
+    setRequestId(requestId);
   };
 
   const {
@@ -59,6 +47,25 @@ const AddStudent = () => {
     validationSchema: addStudentSchema,
     onSubmit,
   });
+
+  useDidMountEffect(() => {
+    status === 200
+      ? toast({
+          title: "Success",
+          description: message,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        })
+      : status !== 0 &&
+        toast({
+          title: "Error",
+          description: message ?? "Please try again !",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+  }, [status, message, requestId]);
 
   return (
     <div className={styles.container}>
@@ -122,6 +129,7 @@ const AddStudent = () => {
               name="dateOfBirth"
               size="lg"
               max={moment().subtract(10, "years").format("YYYY-MM-DD")}
+              min={moment().subtract(100, "years").format("YYYY-MM-DD")}
               value={values.dateOfBirth}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -133,7 +141,7 @@ const AddStudent = () => {
           <Button
             type="submit"
             leftIcon={<AiOutlineUserAdd />}
-            isLoading={isSubmitting}
+            isLoading={message ? false : isSubmitting}
             colorScheme="teal"
             size="lg"
           >

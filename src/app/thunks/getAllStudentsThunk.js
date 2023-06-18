@@ -11,6 +11,7 @@ export const getAllStudentsThunk = createAsyncThunk(
         "http://localhost:5000/api/students"
       );
       dispatch(getAllStudents({ data, status }));
+      return data;
     } catch (error) {
       const { data, status } = error.response;
       dispatch(getAllStudents({ message: data.message, status }));

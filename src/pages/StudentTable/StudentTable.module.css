@@ -1,8 +1,14 @@
 @import url("../../App.module.css");
-.container {
+.light,
+.dark {
   margin: 0 auto;
   width: 90%;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: var(--light-text) 1px solid;
   border-radius: 5px;
+}
+
+.light {
+  color: var(--light-background);
+  border: var(--light-background) 1px solid;
 }
