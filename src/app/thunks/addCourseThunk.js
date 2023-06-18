@@ -10,7 +10,6 @@ export const addCourseThunk = createAsyncThunk(
         "http://localhost:5000/api/addcourse",
         values
       );
-      console.log(data, status);
       dispatch(addCourse({ message: data.message, status: status }));
       return data;
     } catch (error) {

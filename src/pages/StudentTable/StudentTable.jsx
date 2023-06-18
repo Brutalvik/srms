@@ -16,10 +16,7 @@ const StudentTable = () => {
   const tableHeaderData = ["Name", "Date of Birth", "Email", "Actions"];
 
   const deleteStudent = (student) => {
-    const response = dispatch(
-      deleteStudentThunk({ id: student._id, dispatch })
-    );
-    console.log(response);
+    dispatch(deleteStudentThunk({ id: student._id, dispatch }));
   };
 
   useEffect(() => {
@@ -28,13 +25,16 @@ const StudentTable = () => {
 
   return (
     <div className={darkMode ? styles.light : styles.dark}>
-      {!isEmpty(students) && (
+      {!isEmpty(students.data) ? (
         <TableContent
           tableCaption={caption}
           tableHeaderData={tableHeaderData}
           tableRowData={students.data}
           deletAction={deleteStudent}
+          type="student"
         />
+      ) : (
+        <h1>No students found</h1>
       )}
     </div>
   );

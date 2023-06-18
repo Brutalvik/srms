@@ -1,25 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getAllStudents } from "../reducers/student";
+import { getAllCourses } from "../reducers/course";
 
-export const deleteStudentThunk = createAsyncThunk(
-  "deleteStudent",
+export const deleteCourseThunk = createAsyncThunk(
+  "deleteCourse",
   async ({ id, dispatch }) => {
     try {
       const { data, status } = await axios.delete(
-        `http://localhost:5000/api/deletestudent?id=${id}`
+        `http://localhost:5000/api/deletecourse?id=${id}`
       );
       dispatch(
-        getAllStudents({
+        getAllCourses({
           message: data.message,
           status: status,
           data: data.data,
         })
       );
-      return data;
     } catch (error) {
       const { data, status } = await error.response;
-      dispatch(getAllStudents({ message: data.message, status: status }));
+      dispatch(getAllCourses({ message: data.message, status: status }));
     }
   }
 );

@@ -5,7 +5,6 @@ import { getAllStudents } from "../reducers/student";
 export const getAllStudentsThunk = createAsyncThunk(
   "getAllStudents",
   async (dispatch) => {
-    console.log("sending...");
     try {
       const { data, status } = await axios.get(
         "http://localhost:5000/api/students"
