@@ -1,0 +1,18 @@
+.menuItem {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  place-items: center;
+  margin: 5em 0em 0em 0em;
+}
+
+.menuItem > p {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 10px 0px 0px 0px;
+  color: var(--light-text);
+}
+
+.menuItem > p:hover {
+  cursor: pointer;
+  color: var(--dark-text);
+}
