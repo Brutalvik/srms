@@ -6,3 +6,7 @@ export const addStudentSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   dateOfBirth: yup.date().required("Date of birth is required"),
 });
+
+export const addCourseSchema = yup
+  .object()
+  .shape({ courseName: yup.string().required("Course name is required") });

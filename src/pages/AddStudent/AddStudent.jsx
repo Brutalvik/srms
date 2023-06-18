@@ -7,11 +7,12 @@ import {
   Input,
   Button,
   useToast,
+  Stack,
 } from "@chakra-ui/react";
 import moment from "moment/moment";
 import { useFormik } from "formik";
 import { addStudentSchema } from "schemas/validation";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUserAdd, AiOutlineUndo } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { addStudentThunk } from "app/thunks/addStudentThunk";
 import { addStudentConfirmation } from "app/selectors/selectors";
@@ -21,12 +22,15 @@ const AddStudent = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const { message, status } = useSelector(addStudentConfirmation);
-  const [requestId, setRequestId] = useState(null);
 
-  const onSubmit = (values) => {
+  const onReset = () => {
     dispatch(resetStudent());
-    const { requestId } = dispatch(addStudentThunk({ values, dispatch }));
-    setRequestId(requestId);
+  };
+
+  const onSubmit = (values, { setSubmitting }) => {
+    dispatch(resetStudent());
+    dispatch(addStudentThunk({ values, dispatch }));
+    setSubmitting(false);
   };
 
   const {
@@ -37,6 +41,7 @@ const AddStudent = () => {
     handleSubmit,
     handleChange,
     handleBlur,
+    handleReset,
   } = useFormik({
     initialValues: {
       firstName: "",
@@ -46,6 +51,7 @@ const AddStudent = () => {
     },
     validationSchema: addStudentSchema,
     onSubmit,
+    onReset,
   });
 
   useDidMountEffect(() => {
@@ -65,13 +71,13 @@ const AddStudent = () => {
           duration: 5000,
           isClosable: true,
         });
-  }, [status, message, requestId]);
+  }, [status, message]);
 
   return (
     <div className={styles.container}>
       <h1>Add Student</h1>
       <div className={styles.form}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} onReset={handleReset}>
           <FormControl>
             <FormLabel>First Name</FormLabel>
             <Input
@@ -138,15 +144,31 @@ const AddStudent = () => {
               <p className={styles.error}>{errors.dateOfBirth}</p>
             )}
           </FormControl>
-          <Button
-            type="submit"
-            leftIcon={<AiOutlineUserAdd />}
-            isLoading={message ? false : isSubmitting}
-            colorScheme="teal"
-            size="lg"
+          <Stack
+            direction="row"
+            spacing={10}
+            align="center"
+            justify="space-around"
           >
-            Add
-          </Button>
+            <Button
+              type="reset"
+              leftIcon={<AiOutlineUndo />}
+              isLoading={isSubmitting}
+              colorScheme="teal"
+              size="lg"
+            >
+              Reset
+            </Button>
+            <Button
+              type="submit"
+              leftIcon={<AiOutlineUserAdd />}
+              isLoading={isSubmitting}
+              colorScheme="teal"
+              size="lg"
+            >
+              Add
+            </Button>
+          </Stack>
         </form>
       </div>
     </div>

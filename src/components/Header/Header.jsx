@@ -9,13 +9,12 @@ import {
 } from "app/selectors/selectors";
 import { toggleDarkMode, toggleHamburger } from "app/reducers/theme";
 import Spinner from "UI/Spinner/Spinner";
+import DrawerItem from "components/Drawer/DrawerItem";
 
 const Header = () => {
   const dispatch = useDispatch();
   const hamburgerIsOpen = useSelector(hamburgerIsOpenSelector);
   const darkMode = useSelector(darkModeSelector);
-
-  const DrawerItem = lazy(() => import("components/Drawer/DrawerItem"));
 
   const toggleThemeIcon = () => {
     import("features/functions").then((module) => {
