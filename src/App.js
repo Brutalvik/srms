@@ -1,11 +1,10 @@
 import styles from "./App.module.css";
 import Header from "components/Header/Header";
 import { useSelector } from "react-redux";
-import { selectDarkMode, selectHamburgerIsOpen } from "app/selectors/theme";
+import { darkModeSelector } from "app/selectors/selectors";
 
 const App = () => {
-  const darkMode = useSelector(selectDarkMode);
-  const hamburgerIsOpen = useSelector(selectHamburgerIsOpen);
+  const darkMode = useSelector(darkModeSelector);
 
   console.log(darkMode);
   return (
