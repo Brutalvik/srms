@@ -1,0 +1,8 @@
+@import url("../../App.module.css");
+.container {
+  margin: 0 auto;
+  width: 90%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

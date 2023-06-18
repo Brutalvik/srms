@@ -2,14 +2,14 @@ import React, { Suspense, lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStudentsThunk } from "app/thunks/getAllStudentsThunk";
 import { darkModeSelector, getAllStudents } from "app/selectors/selectors";
-import { Tab } from "@chakra-ui/react";
 import { isEmpty } from "lodash";
+import TableContent from "UI/TableContent/TableContent";
+import styles from "./StudentTable.module.css";
 
 const StudentTable = () => {
   const dispatch = useDispatch();
   const students = useSelector(getAllStudents);
   const darkMode = useSelector(darkModeSelector);
-  const TableContent = lazy(() => import("UI/TableContent/TableContent"));
 
   const caption = "Student Table";
   const tableHeaderData = [
@@ -25,7 +25,7 @@ const StudentTable = () => {
   }, []);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <div className={styles.container}>
       {!isEmpty(students) && (
         <TableContent
           colorScheme={darkMode ? "teal" : "gray"}
@@ -34,7 +34,7 @@ const StudentTable = () => {
           tableRowData={students.data}
         />
       )}
-    </Suspense>
+    </div>
   );
 };
 

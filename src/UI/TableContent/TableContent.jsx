@@ -3,7 +3,6 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
@@ -37,7 +36,7 @@ const TableContent = ({
               <Td>{row.lastName}</Td>
               <Td>{row.email}</Td>
               <Td>{row.dateOfBirth}</Td>
-              <Td>
+              <Td className={styles.action}>
                 <AiFillDelete className={styles.icon} />
                 <AiFillEdit className={styles.icon} />
               </Td>
