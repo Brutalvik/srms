@@ -1,14 +1,44 @@
 import React from "react";
 import styles from "./AddStudent.module.css";
-import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 import moment from "moment/moment";
 import { useFormik } from "formik";
 import { addStudentSchema } from "schemas/validation";
 import { AiOutlineUserAdd } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { addStudentThunk } from "app/thunks/addStudentThunk";
+import { addStudentConfirmation } from "app/selectors/selectors";
+import { resetStudent } from "app/reducers/student";
 
 const AddStudent = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const { message, status } = useSelector(addStudentConfirmation);
+
+  const onSubmit = async (values) => {
+    dispatch(resetStudent());
+    dispatch(addStudentThunk({ values, dispatch }));
+    status === 200
+      ? toast({
+          title: "Success",
+          description: message,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        })
+      : toast({
+          title: "Error",
+          description: message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
   };
 
   const {
@@ -91,7 +121,7 @@ const AddStudent = () => {
               placeholder="Select Date"
               name="dateOfBirth"
               size="lg"
-              max={moment().format("YYYY-MM-DD")}
+              max={moment().subtract(10, "years").format("YYYY-MM-DD")}
               value={values.dateOfBirth}
               onChange={handleChange}
               onBlur={handleBlur}

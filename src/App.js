@@ -10,6 +10,7 @@ const App = () => {
   const darkMode = useSelector(darkModeSelector);
   const Home = lazy(() => import("pages/Home/Home"));
   const AddStudent = lazy(() => import("pages/AddStudent/AddStudent"));
+  const StudentTable = lazy(() => import("pages/StudentTable/StudentTable"));
 
   return (
     <div className={darkMode ? styles.dark : styles.light}>
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/addstudent" element={<AddStudent />} />
+          <Route path="/students" element={<StudentTable />} />
         </Routes>
       </Suspense>
     </div>
