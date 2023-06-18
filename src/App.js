@@ -5,8 +5,6 @@ import { darkModeSelector } from "app/selectors/selectors";
 
 const App = () => {
   const darkMode = useSelector(darkModeSelector);
-
-  console.log(darkMode);
   return (
     <div className={darkMode ? styles.dark : styles.light}>
       <Header />
