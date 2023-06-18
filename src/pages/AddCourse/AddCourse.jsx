@@ -6,6 +6,8 @@ import {
   Input,
   Button,
   useToast,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { addCourseSchema } from "schemas/validation";
@@ -14,6 +16,7 @@ import useDidMountEffect from "customHooks/useDidMountEffect";
 import { addCourseThunk } from "app/thunks/addCourseThunk";
 import { resetCourse } from "app/reducers/course";
 import { addCourseConfirmation } from "app/selectors/selectors";
+import { AiOutlineClose } from "react-icons/ai";
 
 const AddCourse = () => {
   const toast = useToast();
@@ -34,6 +37,7 @@ const AddCourse = () => {
     handleSubmit,
     handleChange,
     handleBlur,
+    handleReset,
   } = useFormik({
     initialValues: {
       courseName: "",
@@ -67,16 +71,24 @@ const AddCourse = () => {
       <form onSubmit={handleSubmit}>
         <FormControl>
           <FormLabel>Course Name</FormLabel>
-          <Input
-            type="text"
-            variant="flushed"
-            placeholder="Java, C++, etc."
-            name="courseName"
-            size="lg"
-            value={values.courseName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
+          <InputGroup>
+            <Input
+              type="text"
+              variant="flushed"
+              placeholder="Java, C++, etc."
+              name="courseName"
+              size="lg"
+              value={values.courseName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <InputRightElement width="4.5rem">
+              <AiOutlineClose
+                className={styles.closebtn}
+                onClick={handleReset}
+              />
+            </InputRightElement>
+          </InputGroup>
           {touched.courseName && errors.courseName && (
             <p className={styles.error}>{errors.courseName}</p>
           )}

@@ -20,3 +20,8 @@
 .error {
   color: #ff6347;
 }
+
+.closebtn {
+  font-size: 1.25em;
+  cursor: pointer;
+}
