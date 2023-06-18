@@ -3,10 +3,27 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 70vh;
 }
 
 .container h1 {
   font-size: 2rem;
   font-weight: 500;
+}
+
+.form {
+  min-width: 450px;
+}
+
+.form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form form > * {
+  margin-bottom: 0;
+}
+
+.error {
+  color: #ff6347;
 }

@@ -4,7 +4,6 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
-  DrawerOverlay,
   DrawerContent,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +36,6 @@ const DrawerItem = () => {
         onClose={lazyImport}
         size="xs"
       >
-        {hamburgerIsOpen && <DrawerOverlay />}
         <DrawerContent>
           <DrawerHeader textAlign="right">SRMS</DrawerHeader>
           <DrawerBody>
