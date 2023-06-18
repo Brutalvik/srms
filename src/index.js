@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { store, persistor } from "./app/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const theme = extendTheme({
   colors: {
@@ -18,7 +20,11 @@ const theme = extendTheme({
 });
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ChakraProvider theme={theme}>
-    <App />
-  </ChakraProvider>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </PersistGate>
+  </Provider>
 );
