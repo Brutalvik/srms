@@ -5,6 +5,7 @@ import { darkModeSelector, getAllStudents } from "app/selectors/selectors";
 import { isEmpty } from "lodash";
 import TableContent from "UI/TableContent/TableContent";
 import styles from "./StudentTable.module.css";
+import { deleteStudentThunk } from "app/thunks/deleteStudentThunk";
 
 const StudentTable = () => {
   const dispatch = useDispatch();
@@ -12,20 +13,13 @@ const StudentTable = () => {
   const darkMode = useSelector(darkModeSelector);
 
   const caption = "Student Table";
-  const tableHeaderData = [
-    "First Name",
-    "Last Name",
-    "Email",
-    "Date of Birth",
-    "Actions",
-  ];
+  const tableHeaderData = ["Name", "Date of Birth", "Email", "Actions"];
 
   const deleteStudent = (student) => {
-    console.log(student);
-  };
-
-  const editStudent = (student) => {
-    console.log(student);
+    const response = dispatch(
+      deleteStudentThunk({ id: student._id, dispatch })
+    );
+    console.log(response);
   };
 
   useEffect(() => {

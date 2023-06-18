@@ -13,9 +13,3 @@
 .edit:hover {
   color: #d27604;
 }
-
-.action {
-  display: flex;
-  justify-content: left;
-  gap: 30px;
-}

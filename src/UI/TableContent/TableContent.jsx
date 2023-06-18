@@ -8,9 +8,12 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Tooltip,
+  Stack,
 } from "@chakra-ui/react";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import styles from "./TableContent.module.css";
+import moment from "moment";
 
 const TableContent = ({
   colorScheme,
@@ -18,7 +21,6 @@ const TableContent = ({
   tableHeaderData,
   tableRowData,
   deletAction,
-  editAction,
 }) => {
   return (
     <TableContainer>
@@ -34,18 +36,13 @@ const TableContent = ({
         <Tbody>
           {tableRowData.map((row) => (
             <Tr key={row._id}>
-              <Td>{row.firstName}</Td>
-              <Td>{row.lastName}</Td>
+              <Td>{`${row.firstName} ${row.lastName}`}</Td>
+              <Td>{moment(row.dateOfBirth).format("DD/MM/YYYY")}</Td>
               <Td>{row.email}</Td>
-              <Td>{row.dateOfBirth}</Td>
-              <Td className={styles.action}>
+              <Td>
                 <AiFillDelete
                   className={styles.delete}
                   onClick={() => deletAction(row)}
-                />
-                <AiFillEdit
-                  className={styles.edit}
-                  onClick={() => editAction(row)}
                 />
               </Td>
             </Tr>
