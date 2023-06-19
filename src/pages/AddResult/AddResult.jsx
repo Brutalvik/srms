@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { addResultSchema } from "schemas/validation";
 import { useFormik } from "formik";
 import styles from "./AddResult.module.css";
@@ -45,15 +45,48 @@ const AddResult = () => {
     handleChange,
     handleBlur,
     handleReset,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       studentName: "",
+      studentId: "",
       courseName: "",
+      courseId: "",
       grade: "",
     },
     validationSchema: addResultSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    const selectedStudent = students.data.find(
+      (student) =>
+        `${startCase(student.firstName)} ${startCase(student.lastName)}` ===
+        values.studentName
+    );
+
+    if (selectedStudent) {
+      setFieldValue("studentId", selectedStudent._id);
+    } else {
+      setFieldValue("studentId", "");
+    }
+
+    const selectedCourse = courses.data.find(
+      (course) => startCase(course.courseName) === values.courseName
+    );
+
+    if (selectedCourse) {
+      setFieldValue("courseId", selectedCourse._id);
+    } else {
+      setFieldValue("courseId", "");
+    }
+  }, [
+    values.studentName,
+    values.courseName,
+    students.data,
+    courses.data,
+    setFieldValue,
+  ]);
 
   useDidMountEffect(() => {
     status === 200

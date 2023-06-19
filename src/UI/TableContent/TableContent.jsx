@@ -51,21 +51,39 @@ const TableContent = ({
               </Tr>
             ))}
           </Tbody>
+        ) : type === "courses" && tableRowData?.length > 0 ? (
+          <Tbody>
+            {tableRowData.map((row) => (
+              <Tr key={row._id}>
+                <Td>{`${startCase(row.courseName)}`}</Td>
+                <Td>
+                  <AiFillDelete
+                    className={styles.delete}
+                    onClick={() => deletAction(row)}
+                  />
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
         ) : (
-          type === "courses" &&
+          type === "results" &&
           tableRowData?.length > 0 && (
             <Tbody>
-              {tableRowData.map((row) => (
-                <Tr key={row._id}>
-                  <Td>{`${startCase(row.courseName)}`}</Td>
-                  <Td>
-                    <AiFillDelete
-                      className={styles.delete}
-                      onClick={() => deletAction(row)}
-                    />
-                  </Td>
-                </Tr>
-              ))}
+              {tableRowData.map((row) => {
+                return (
+                  <Tr key={row._id}>
+                    <Td>{`${startCase(row.studentName)}`}</Td>
+                    <Td>{`${startCase(row.courseName)}`}</Td>
+                    <Td>{`${startCase(row.grade)}`}</Td>
+                    <Td>
+                      <AiFillDelete
+                        className={styles.delete}
+                        onClick={() => deletAction(row)}
+                      />
+                    </Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           )
         )}

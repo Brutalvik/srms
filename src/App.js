@@ -14,6 +14,7 @@ const App = () => {
   const AddCourse = lazy(() => import("pages/AddCourse/AddCourse"));
   const Courses = lazy(() => import("pages/CourseTable/CourseTable"));
   const AddResult = lazy(() => import("pages/AddResult/AddResult"));
+  const Results = lazy(() => import("pages/ResultsTable/ResultsTable"));
 
   return (
     <div className={darkMode ? styles.dark : styles.light}>
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/addcourse" element={<AddCourse />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/addresult" element={<AddResult />} />
+          <Route path="/results" element={<Results />} />
           <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </Suspense>

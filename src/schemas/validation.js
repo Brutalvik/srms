@@ -13,6 +13,8 @@ export const addCourseSchema = yup
 
 export const addResultSchema = yup.object().shape({
   studentName: yup.string().required("Student name is required"),
+  studentId: yup.string(),
   courseName: yup.string().required("Course name is required"),
+  courseId: yup.string(),
   grade: yup.string().required("Score is required"),
 });
