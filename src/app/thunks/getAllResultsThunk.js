@@ -7,7 +7,7 @@ export const getAllResultsThunk = createAsyncThunk(
   async (dispatch) => {
     try {
       const { data, status } = await axios.get(
-        "http://localhost:5000/api/results"
+        `${process.env.REACT_APP_BASE_URL}/results`
       );
       await dispatch(getAllResults({ data, status }));
       return data;

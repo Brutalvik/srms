@@ -7,7 +7,7 @@ export const deleteCourseThunk = createAsyncThunk(
   async ({ id, dispatch }) => {
     try {
       const { data, status } = await axios.delete(
-        `http://localhost:5000/api/deletecourse?id=${id}`
+        `${process.env.REACT_APP_BASE_URL}/deletecourse?id=${id}`
       );
       await dispatch(
         getAllCourses({

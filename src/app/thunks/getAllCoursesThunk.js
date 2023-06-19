@@ -7,7 +7,7 @@ export const getAllCoursesThunk = createAsyncThunk(
   async (dispatch) => {
     try {
       const { data, status } = await axios.get(
-        "http://localhost:5000/api/courses"
+        `${process.env.REACT_APP_BASE_URL}/courses`
       );
       await dispatch(getAllCourses({ data, status }));
       return data;

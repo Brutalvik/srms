@@ -7,7 +7,7 @@ export const addResultThunk = createAsyncThunk(
   async ({ values, dispatch }) => {
     try {
       const { data, status } = await axios.post(
-        "http://localhost:5000/api/addresult",
+        `${process.env.REACT_APP_BASE_URL}/addresult`,
         values
       );
       await dispatch(addResult({ message: data.message, status: status }));

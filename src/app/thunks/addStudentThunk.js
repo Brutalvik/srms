@@ -7,7 +7,7 @@ export const addStudentThunk = createAsyncThunk(
   async ({ values, dispatch }) => {
     try {
       const { data, status } = await axios.post(
-        "http://localhost:5000/api/addstudent",
+        `${process.env.REACT_APP_BASE_URL}/addstudent`,
         values
       );
       await dispatch(addStudent({ message: data.message, status: status }));
