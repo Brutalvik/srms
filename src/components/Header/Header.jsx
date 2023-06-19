@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import styles from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";

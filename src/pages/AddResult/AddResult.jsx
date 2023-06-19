@@ -8,24 +8,32 @@ import {
   FormLabel,
   Button,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
 import {
-  darkModeSelector,
   getAllStudents,
   getAllCourses,
+  addResultConfirmation,
 } from "app/selectors/selectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startCase } from "lodash";
 import { AiOutlineUserAdd, AiOutlineUndo } from "react-icons/ai";
+import { resetResults } from "app/reducers/results";
+import { addResultThunk } from "app/thunks/addResultThunk";
+import useDidMountEffect from "customHooks/useDidMountEffect";
 
 const AddResult = () => {
+  const toast = useToast();
+  const dispatch = useDispatch();
   const students = useSelector(getAllStudents);
   const courses = useSelector(getAllCourses);
-  useSelector((state) => console.log(state));
-
+  const { message, status } = useSelector(addResultConfirmation);
   const grades = ["A", "B", "C", "D", "E", "F"];
+
   const onSubmit = (values, { setSubmitting }) => {
-    console.log(values);
+    dispatch(resetResults());
+    dispatch(addResultThunk({ values, dispatch }));
+    setSubmitting(false);
   };
 
   const {
@@ -37,7 +45,6 @@ const AddResult = () => {
     handleChange,
     handleBlur,
     handleReset,
-    setSubmitting,
   } = useFormik({
     initialValues: {
       studentName: "",
@@ -47,11 +54,31 @@ const AddResult = () => {
     validationSchema: addResultSchema,
     onSubmit,
   });
+
+  useDidMountEffect(() => {
+    status === 200
+      ? toast({
+          title: "Success",
+          description: message,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        })
+      : status !== 0 &&
+        toast({
+          title: "Error",
+          description: message ?? "Please try again !",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+  }, [status, message]);
+
   return (
     <div className={styles.container}>
       <h1>Add Result</h1>
       <div className={styles.form}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} onReset={handleReset}>
           <FormControl>
             <FormLabel>Select Student</FormLabel>
             <Select

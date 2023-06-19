@@ -21,6 +21,7 @@ const StudentTable = () => {
 
   useEffect(() => {
     dispatch(getAllStudentsThunk(dispatch));
+    // eslint-disable-next-line
   }, []);
 
   return (
