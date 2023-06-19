@@ -10,11 +10,11 @@ export const addStudentThunk = createAsyncThunk(
         "http://localhost:5000/api/addstudent",
         values
       );
-      dispatch(addStudent({ message: data.message, status: status }));
+      await dispatch(addStudent({ message: data.message, status: status }));
       return data;
     } catch (error) {
       const { data, status } = await error.response;
-      dispatch(addStudent({ message: data.message, status: status }));
+      await dispatch(addStudent({ message: data.message, status: status }));
     }
   }
 );

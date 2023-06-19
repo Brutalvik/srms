@@ -32,6 +32,8 @@ const AddResult = () => {
   const { message, status } = useSelector(addResultConfirmation);
   const grades = ["A", "B", "C", "D", "E", "F"];
 
+  useSelector((state) => console.log(state));
+
   const onSubmit = (values, { setSubmitting }) => {
     dispatch(resetResults());
     dispatch(addResultThunk({ values, dispatch }));
@@ -130,7 +132,7 @@ const AddResult = () => {
               name="studentName"
               value={values.studentName}
             >
-              {students.data.map((student) => (
+              {students?.data.map((student) => (
                 <option key={student._id} className={styles.options}>
                   {startCase(student.firstName)} {startCase(student.lastName)}
                 </option>
@@ -150,7 +152,7 @@ const AddResult = () => {
               name="courseName"
               value={values.courseName}
             >
-              {courses.data.map((course) => (
+              {courses?.data.map((course) => (
                 <option key={course._id} className={styles.options}>
                   {startCase(course.courseName)}
                 </option>

@@ -17,9 +17,12 @@ const course = createSlice({
   initialState,
   reducers: {
     getAllCourses: (state, action) => {
-      state.courses.data = action.payload.data;
-      state.courses.message = action.payload.message;
-      state.courses.status = action.payload.status;
+      state.courses = {
+        ...state.courses,
+        data: action.payload.data,
+        message: action.payload.message,
+        status: action.payload.status,
+      };
     },
     addCourse: (state, action) => {
       state.addCourse.message = action.payload.message;

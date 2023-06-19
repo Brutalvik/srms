@@ -9,7 +9,7 @@ export const deleteCourseThunk = createAsyncThunk(
       const { data, status } = await axios.delete(
         `http://localhost:5000/api/deletecourse?id=${id}`
       );
-      dispatch(
+      await dispatch(
         getAllCourses({
           message: data.message,
           status: status,
@@ -18,7 +18,7 @@ export const deleteCourseThunk = createAsyncThunk(
       );
     } catch (error) {
       const { data, status } = await error.response;
-      dispatch(getAllCourses({ message: data.message, status: status }));
+      await dispatch(getAllCourses({ message: data.message, status: status }));
     }
   }
 );

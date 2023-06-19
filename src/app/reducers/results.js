@@ -17,9 +17,12 @@ const results = createSlice({
   initialState,
   reducers: {
     getAllResults: (state, action) => {
-      state.results.data = action.payload.data;
-      state.results.message = action.payload.message;
-      state.results.status = action.payload.status;
+      state.results = {
+        ...state.results,
+        data: action.payload.data,
+        message: action.payload.message,
+        status: action.payload.status,
+      };
     },
     addResult: (state, action) => {
       state.addResult.message = action.payload.message;

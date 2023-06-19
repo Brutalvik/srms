@@ -17,9 +17,12 @@ const student = createSlice({
   initialState,
   reducers: {
     getAllStudents: (state, action) => {
-      state.students.data = action.payload.data;
-      state.students.message = action.payload.message;
-      state.students.status = action.payload.status;
+      state.students = {
+        ...state.students,
+        data: action.payload.data,
+        message: action.payload.message,
+        status: action.payload.status,
+      };
     },
     addStudent: (state, action) => {
       state.addStudent.message = action.payload.message;

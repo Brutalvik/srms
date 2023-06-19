@@ -9,11 +9,11 @@ export const getAllResultsThunk = createAsyncThunk(
       const { data, status } = await axios.get(
         "http://localhost:5000/api/results"
       );
-      dispatch(getAllResults({ data, status }));
+      await dispatch(getAllResults({ data, status }));
       return data;
     } catch (error) {
       const { data, status } = error.response;
-      dispatch(getAllResults({ message: data.message, status }));
+      await dispatch(getAllResults({ message: data.message, status }));
     }
   }
 );

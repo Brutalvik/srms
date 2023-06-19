@@ -9,7 +9,7 @@ export const deleteStudentThunk = createAsyncThunk(
       const { data, status } = await axios.delete(
         `http://localhost:5000/api/deletestudent?id=${id}`
       );
-      dispatch(
+      await dispatch(
         getAllStudents({
           message: data.message,
           status: status,
@@ -19,7 +19,7 @@ export const deleteStudentThunk = createAsyncThunk(
       return data;
     } catch (error) {
       const { data, status } = await error.response;
-      dispatch(getAllStudents({ message: data.message, status: status }));
+      await dispatch(getAllStudents({ message: data.message, status: status }));
     }
   }
 );
