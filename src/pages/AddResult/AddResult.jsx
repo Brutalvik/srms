@@ -111,8 +111,8 @@ const AddResult = () => {
   }, [status, message]);
 
   useEffect(() => {
-    dispatch(getAllStudentsThunk());
-    dispatch(getAllCoursesThunk());
+    dispatch(getAllStudentsThunk(dispatch));
+    dispatch(getAllCoursesThunk(dispatch));
     // eslint-disable-next-line
   }, []);
 
