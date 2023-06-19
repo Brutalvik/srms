@@ -27,10 +27,11 @@ const AddStudent = () => {
     dispatch(resetStudent());
   };
 
-  const onSubmit = (values, { setSubmitting }) => {
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
     dispatch(resetStudent());
     dispatch(addStudentThunk({ values, dispatch }));
     setSubmitting(false);
+    resetForm();
   };
 
   const {

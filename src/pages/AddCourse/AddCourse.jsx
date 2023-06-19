@@ -23,10 +23,11 @@ const AddCourse = () => {
   const dispatch = useDispatch();
   const { message, status } = useSelector(addCourseConfirmation);
 
-  const onSubmit = (values, { setSubmitting }) => {
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
     dispatch(resetCourse());
     dispatch(addCourseThunk({ values, dispatch }));
     setSubmitting(false);
+    resetForm();
   };
 
   const {

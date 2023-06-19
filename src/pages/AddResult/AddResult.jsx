@@ -32,10 +32,11 @@ const AddResult = () => {
   const { message, status } = useSelector(addResultConfirmation);
   const grades = ["A", "B", "C", "D", "E", "F"];
 
-  const onSubmit = (values, { setSubmitting }) => {
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
     dispatch(resetResults());
     dispatch(addResultThunk({ values, dispatch }));
     setSubmitting(false);
+    resetForm();
   };
 
   const {
