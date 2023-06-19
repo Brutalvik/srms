@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const course = createSlice({
-  name: "student",
+  name: "course",
   initialState,
   reducers: {
     getAllCourses: (state, action) => {
