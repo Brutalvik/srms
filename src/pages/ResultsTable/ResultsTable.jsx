@@ -1,23 +1,46 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { darkModeSelector, getAllResults } from "app/selectors/selectors";
+import {
+  darkModeSelector,
+  getAllCourses,
+  getAllResults,
+  getAllStudents,
+} from "app/selectors/selectors";
 import { isEmpty } from "lodash";
 import TableContent from "UI/TableContent/TableContent";
 import styles from "./ResultsTable.module.css";
-// import { deleteCourseThunk } from "app/thunks/deleteCourseThunk";
 import { getAllResultsThunk } from "app/thunks/getAllResultsThunk";
 
 const ResultsTable = () => {
   const dispatch = useDispatch();
   const results = useSelector(getAllResults);
+  const courses = useSelector(getAllCourses);
+  const students = useSelector(getAllStudents);
   const darkMode = useSelector(darkModeSelector);
 
-  const caption = "Results Table";
-  const tableHeaderData = ["Student Name", "Course Name", "Result", "Actions"];
+  const filteredResults = results.data.map((result) => {
+    const matchingCourse = courses.data.find(
+      (course) => course._id === result.courseId
+    );
+    const matchingStudent = students.data.find(
+      (student) => student._id === result.studentId
+    );
 
-  const deleteCourse = (course) => {
-    // dispatch(deleteCourseThunk({ id: course._id, dispatch }));
-  };
+    const filteredResult = { ...result };
+
+    if (!matchingCourse) {
+      filteredResult.grade = "-";
+    }
+
+    if (!matchingStudent) {
+      filteredResult.grade = "-";
+    }
+
+    return filteredResult;
+  });
+
+  const caption = "Results Table";
+  const tableHeaderData = ["Student Name", "Course Name", "Result"];
 
   useEffect(() => {
     dispatch(getAllResultsThunk(dispatch));
@@ -30,8 +53,7 @@ const ResultsTable = () => {
         <TableContent
           tableCaption={caption}
           tableHeaderData={tableHeaderData}
-          tableRowData={results.data}
-          deletAction={deleteCourse}
+          tableRowData={filteredResults}
           type="results"
         />
       ) : (

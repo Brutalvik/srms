@@ -75,12 +75,6 @@ const TableContent = ({
                     <Td>{`${startCase(row.studentName)}`}</Td>
                     <Td>{`${startCase(row.courseName)}`}</Td>
                     <Td>{`${startCase(row.grade)}`}</Td>
-                    <Td>
-                      <AiFillDelete
-                        className={styles.delete}
-                        onClick={() => deletAction(row)}
-                      />
-                    </Td>
                   </Tr>
                 );
               })}

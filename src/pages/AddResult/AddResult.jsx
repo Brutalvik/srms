@@ -21,6 +21,8 @@ import { AiOutlineUserAdd, AiOutlineUndo } from "react-icons/ai";
 import { resetResults } from "app/reducers/results";
 import { addResultThunk } from "app/thunks/addResultThunk";
 import useDidMountEffect from "customHooks/useDidMountEffect";
+import { getAllStudentsThunk } from "app/thunks/getAllStudentsThunk";
+import { getAllCoursesThunk } from "app/thunks/getAllCoursesThunk";
 
 const AddResult = () => {
   const toast = useToast();
@@ -106,6 +108,12 @@ const AddResult = () => {
           isClosable: true,
         });
   }, [status, message]);
+
+  useEffect(() => {
+    dispatch(getAllStudentsThunk());
+    dispatch(getAllCoursesThunk());
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className={styles.container}>
