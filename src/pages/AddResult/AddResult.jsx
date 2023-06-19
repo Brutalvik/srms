@@ -32,8 +32,6 @@ const AddResult = () => {
   const { message, status } = useSelector(addResultConfirmation);
   const grades = ["A", "B", "C", "D", "E", "F"];
 
-  useSelector((state) => console.log(state));
-
   const onSubmit = (values, { setSubmitting }) => {
     dispatch(resetResults());
     dispatch(addResultThunk({ values, dispatch }));

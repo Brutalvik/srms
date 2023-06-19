@@ -9,7 +9,6 @@ export const getAllCoursesThunk = createAsyncThunk(
       const { data, status } = await axios.get(
         "http://localhost:5000/api/courses"
       );
-      console.log("FROM THUNK : ", data);
       await dispatch(getAllCourses({ data, status }));
       return data;
     } catch (error) {
