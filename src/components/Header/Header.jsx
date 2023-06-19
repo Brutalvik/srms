@@ -17,13 +17,13 @@ const Header = () => {
   const darkMode = useSelector(darkModeSelector);
 
   const toggleThemeIcon = () => {
-    import("features/functions").then((module) => {
+    import("utils/functions").then((module) => {
       module.handleToggle(dispatch, toggleDarkMode);
     });
   };
 
   const handleHamburgerToggle = () => {
-    import("features/functions").then((module) => {
+    import("utils/functions").then((module) => {
       module.handleToggle(dispatch, toggleHamburger);
     });
   };

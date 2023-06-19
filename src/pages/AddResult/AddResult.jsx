@@ -21,7 +21,8 @@ import { AiOutlineUserAdd, AiOutlineUndo } from "react-icons/ai";
 const AddResult = () => {
   const students = useSelector(getAllStudents);
   const courses = useSelector(getAllCourses);
-  const darkMode = useSelector(darkModeSelector);
+  useSelector((state) => console.log(state));
+
   const grades = ["A", "B", "C", "D", "E", "F"];
   const onSubmit = (values, { setSubmitting }) => {
     console.log(values);
@@ -36,6 +37,7 @@ const AddResult = () => {
     handleChange,
     handleBlur,
     handleReset,
+    setSubmitting,
   } = useFormik({
     initialValues: {
       studentName: "",

@@ -19,7 +19,7 @@ const DrawerItem = () => {
   const hamburgerIsOpen = useSelector(hamburgerIsOpenSelector);
 
   const lazyImport = () => {
-    import("features/functions").then((module) => {
+    import("utils/functions").then((module) => {
       module.handleToggle(dispatch, toggleHamburger);
     });
   };

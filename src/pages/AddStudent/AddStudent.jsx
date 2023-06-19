@@ -153,7 +153,6 @@ const AddStudent = () => {
             <Button
               type="reset"
               leftIcon={<AiOutlineUndo />}
-              isLoading={isSubmitting}
               colorScheme="teal"
               size="lg"
             >
