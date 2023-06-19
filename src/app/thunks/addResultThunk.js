@@ -10,11 +10,11 @@ export const addResultThunk = createAsyncThunk(
         "http://localhost:5000/api/addresult",
         values
       );
-      dispatch(addCourse({ message: data.message, status: status }));
+      dispatch(addResult({ message: data.message, status: status }));
       return data;
     } catch (error) {
       const { data, status } = await error.response;
-      dispatch(addCourse({ message: data.message, status: status }));
+      dispatch(addResult({ message: data.message, status: status }));
     }
   }
 );
