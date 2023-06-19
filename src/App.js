@@ -15,6 +15,7 @@ const App = () => {
   const Courses = lazy(() => import("pages/CourseTable/CourseTable"));
   const AddResult = lazy(() => import("pages/AddResult/AddResult"));
   const Results = lazy(() => import("pages/ResultsTable/ResultsTable"));
+  const NotFound = lazy(() => import("pages/NotFound/NotFound"));
 
   return (
     <div className={darkMode ? styles.dark : styles.light}>
@@ -28,7 +29,7 @@ const App = () => {
           <Route path="/courses" element={<Courses />} />
           <Route path="/addresult" element={<AddResult />} />
           <Route path="/results" element={<Results />} />
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </div>
