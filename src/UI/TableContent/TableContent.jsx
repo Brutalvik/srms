@@ -12,7 +12,7 @@ import {
 import { AiFillDelete } from "react-icons/ai";
 import styles from "./TableContent.module.css";
 import moment from "moment";
-import { isEmpty } from "lodash";
+import { startCase } from "lodash";
 
 const TableContent = ({
   colorScheme,
@@ -37,7 +37,9 @@ const TableContent = ({
           <Tbody>
             {tableRowData.map((row) => (
               <Tr key={row._id}>
-                <Td>{`${row.firstName} ${row.lastName}`}</Td>
+                <Td>{`${startCase(row.firstName)} ${startCase(
+                  row.lastName
+                )}`}</Td>
                 <Td>{moment(row.dateOfBirth).format("DD/MM/YYYY")}</Td>
                 <Td>{row.email}</Td>
                 <Td>
@@ -55,7 +57,7 @@ const TableContent = ({
             <Tbody>
               {tableRowData.map((row) => (
                 <Tr key={row._id}>
-                  <Td>{`${row.courseName}`}</Td>
+                  <Td>{`${startCase(row.courseName)}`}</Td>
                   <Td>
                     <AiFillDelete
                       className={styles.delete}

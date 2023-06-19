@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStudentsThunk } from "app/thunks/getAllStudentsThunk";
 import { darkModeSelector, getAllStudents } from "app/selectors/selectors";

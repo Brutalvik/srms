@@ -10,3 +10,9 @@ export const addStudentSchema = yup.object().shape({
 export const addCourseSchema = yup
   .object()
   .shape({ courseName: yup.string().required("Course name is required") });
+
+export const addResultSchema = yup.object().shape({
+  studentName: yup.string().required("Student name is required"),
+  courseName: yup.string().required("Course name is required"),
+  grade: yup.string().required("Score is required"),
+});
